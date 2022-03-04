@@ -153,7 +153,7 @@ class DemoApplicationTests {
 		try {
 			tempScanner.nextLine();
 		} catch (Exception e) {
-			actaulErr = e.getLocalizedMessage();
+			actaulErr = e.getLocalizedMessage();	// Storing errMsg in String
 		}
 
 		assertEquals(expectedErr, actaulErr);
