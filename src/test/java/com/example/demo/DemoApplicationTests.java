@@ -4,13 +4,9 @@ import com.example.demo.employee.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.File;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -82,7 +78,7 @@ class DemoApplicationTests {
 		empTSet.add(new Employee_withEqAndHash(2,"Priyanka","Shinde"));
 		empTSet.add(new Employee_withEqAndHash(3,"Rahul","Yadav"));
 
-		assertEquals(empTSet.toString(), expectedStringEmpList);
+		assertEquals(expectedStringEmpList, empTSet.toString());
 	}
 
 	//4. 2.adding emp in TreeSet and check custom sorting with firstName only.
@@ -99,44 +95,51 @@ class DemoApplicationTests {
 		empTSet.add(new Employee_withEqAndHash(2,"Priyanka","Shinde"));
 		empTSet.add(new Employee_withEqAndHash(3,"Rahul","Yadav"));
 
-		assertEquals(empTSet.toString(), expectedStringEmpList);
+		assertEquals(expectedStringEmpList, empTSet.toString());
 	}
 
 	//5. square of each number using stream from numbers list
 	@Test
 	void squareOfNumbersFromListUsingStreamTest() {
 
-		String expectedValue = "[4, 25, 9, 36, 9, 36]";
-
-		Function<Integer, Integer> sqrFunc = n -> n * n;
+		/*String expectedValue = "[4, 25, 9, 36, 9, 36]";
 
 		String actualValue = Arrays.asList(2,5,3,6,3,6)
 				.stream()
-				.map(sqrFunc)
+				.map(n -> n * n)
 				.collect(Collectors.toList())
-				.toString();
+				.toString();*/
 
-		assertEquals(actualValue, expectedValue);
+		List<Integer> expectedList = Arrays.asList(4, 25, 9, 36, 9, 36);
+
+		Assignments square = new Assignments();
+		List<Integer> actualList = square.getSquaredList(Arrays.asList(2,5,3,6,3,6));
+
+		assertEquals(expectedList, actualList);
 	}
 
 	//6. find square of all even numbers using streams from numbers list
 	@Test
 	void squareOfAllEvenNumbersFromListUsingStreamTest() {
 
-		String expectedValue = "[4, 36, 36]";
-
-		Function<Integer, Integer> sqrFunc = n -> n * n;
-
-		Predicate<Integer> evenPred = n -> n % 2 == 0;
+		/*String expectedValue = "[4, 36, 36]";
 
 		String actualValue = Arrays.asList(2,5,3,6,3,6)
 				.stream()
-				.filter(evenPred)
-				.map(sqrFunc)
+				.filter(n -> n % 2 == 0)
+				.map(n -> n * n)
 				.collect(Collectors.toList())
 				.toString();
 
-		assertEquals(actualValue, expectedValue);
+		assertEquals(expectedValue, actualValue);*/
+
+		List<Integer> expectedList = Arrays.asList(4, 36, 36);
+
+		Assignments evenSquare = new Assignments();
+		List<Integer> actualList =
+				evenSquare.getEvenSquaredList(Arrays.asList(2,5,3,6,3,6));
+
+		assertEquals(expectedList, actualList);
 	}
 
 	//7. Try with resource, check if the resource has closed after execution
@@ -153,7 +156,7 @@ class DemoApplicationTests {
 		try {
 			tempScanner.nextLine();
 		} catch (Exception e) {
-			actaulErr = e.getLocalizedMessage();	// Storing errMsg in String
+			actaulErr = e.getLocalizedMessage();
 		}
 
 		assertEquals(expectedErr, actaulErr);
