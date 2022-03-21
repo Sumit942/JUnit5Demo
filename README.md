@@ -7,6 +7,7 @@ Rest all are in DemoApplicationTest.java
 
 
 ------Java Assignments------
+
 Create a project using spring tool suite
 It has to be a maven project with junit using Java 8
 
